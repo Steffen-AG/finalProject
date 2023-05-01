@@ -28,11 +28,24 @@ export class ClickComponentComponent {
 
   async countClick(){
     if(!this.isClicked){
+      const mainButton = document.getElementById('mainButton');
+      const colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink',
+       'teal', 'gold', 'maroon', 'navy', 'crimson', 'lime', 'magenta', 'skyblue', 'salmon', 'olive', 'turquoise'];
       this.isClicked = true;
+
+      const intervalId = setInterval(() => {
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        mainButton!.style.backgroundColor = randomColor;
+      }, 80);
+
+
       for(let i = 0; i < 10; i++){
         this.randNum = Math.floor(Math.random() * 100) * this.multi;
         await this.delay(100);
     }
+
+    clearInterval(intervalId);
+
     this.counter += this.randNum;
     this.isClicked = false;
     }
