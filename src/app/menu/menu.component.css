@@ -1,0 +1,56 @@
+button:hover {
+  cursor: pointer;
+}
+
+#mainDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#inner {
+  margin: 5px;
+  border: 3px solid #ccc;
+}
+
+#playerInfo{
+  position: absolute;
+  top: auto;
+  right: 400px
+
+}
+
+img{
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+}
+img:hover{
+  cursor: pointer;
+}
+
+mat-accordion {
+  margin-right: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#total {
+  justify-content: center;
+  border: 3px solid #ccc;
+  padding: 5px;
+  width: 300px;
+  text-align: center;
+}
+
+.color-button.clicked {
+  background-color: red !important;
+  color: white !important;
+}

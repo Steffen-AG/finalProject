@@ -1,0 +1,26 @@
+<div id="mainDiv">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Menu
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <button (click)="changePage($event)">Home</button>
+        <button (click)="changePage($event)">High Low Bet</button>
+        <button (click)="changePage($event)">Forum</button>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div id="total">
+    <div id="inner">
+      <h2>Total Points:</h2>
+      <h1>{{totalPoints}}</h1>
+    </div>
+  </div>
+  <div id="playerInfo">
+    <h1>Welcome: {{playerName}} </h1>
+  </div>
+  <img [src]="isImage1 ?  '../../assets/soundOFF.png' : '../../assets/soundON.png'" (click)="mute()">
+</div>

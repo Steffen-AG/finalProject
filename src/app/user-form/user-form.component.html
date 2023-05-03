@@ -1,0 +1,14 @@
+<div>
+  <h1>User Information Form</h1>
+  <form (submit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="name" name="Name" id="title" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Favorite color</mat-label>
+      <input matInput [(ngModel)]="color" name="Color" id="title" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>
