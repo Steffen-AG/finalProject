@@ -6,6 +6,9 @@ section{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 80vh;
+    width: 100vw;
+    background-image:url('https://img.freepik.com/premium-vector/cute-frogs-hand-drawn-vector-seamless-pattern-colored-cartoon-ornament-with-animals-design-print-fabric-textile-background-wallpaper-wrapping-decoration_534604-365.jpg?w=2000');
 
 }
 
@@ -19,13 +22,33 @@ section{
 }
 
 img{
-    
     display: flex;
-    width: 100%;
-    height: 100%;
+    width: 30%;
+    height: 70%;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
-img:hover{
-    cursor: pointer;
+
+div{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
 }
+
+button{
+    padding: 10px;
+    background-color: cornflowerblue;
+}
+#multiButton{
+    margin-right: 400px;
+}
+#resetButton{
+    position: absolute;
+    right: 0;
+}
+#clickerButton{
+    margin-left: 100px;
+}
+
+

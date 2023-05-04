@@ -1,1 +1,15 @@
-<button (click)="changeRoute()">test</button>
+<div *ngIf = "!inProgress">
+    <h3>Enter an amount to bet: </h3>
+    <input type="number" [(ngModel)]="betAmount">
+
+    <button (click) = "startGame()">Start Game</button>
+</div>
+
+
+<div id = "game">
+    <h1>{{randomNumber}}</h1>
+
+    <button id="higherButton">Higher!</button>
+    <button id="lowerButton">Lower!</button>
+    <button id="cashOut">Cash Out</button>
+</div>

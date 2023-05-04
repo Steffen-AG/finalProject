@@ -1,8 +1,10 @@
-
 <section>
-    <h1>{{counter}}</h1>
     <h1>{{randNum}}</h1>
-    <button id = "mainButton" mat-raised-button (click) = "countClick()">SPIN</button>
-    <button type="button"(click)="buyMultiplier()">Buy A Multiplier for : {{cost}} </button>
-    <button mat-fab-button type="button"(click)="buyClicker()">Buy A Clicker for : {{clickersCost}}</button>
+    <img [src]="isClicked ? '../../assets/giphy.gif' : '../../assets/giphy.png'">
+    <button id="mainButton" mat-raised-button (click)="countClick()">SPIN</button>
+    <div>
+        <button type="button" id="multiButton" (click)="buyMultiplier()">Buy A Multiplier for : {{cost}} </button>
+        <button type="button" id="clickerButton" (click)="buyClicker()">Buy A Clicker for : {{clickersCost}}</button>
+        <button type="button" id="resetButton" (click)="resetProgress()">Reset ALL progress</button>
+    </div>
 </section>

@@ -12,7 +12,12 @@ button:hover {
 
 #inner {
   margin: 5px;
+  background-color: white;
   border: 3px solid #ccc;
+}
+
+button{
+  background-color: beige;
 }
 
 #playerInfo{
@@ -44,6 +49,7 @@ mat-accordion {
 
 #total {
   justify-content: center;
+  background-color: white;
   border: 3px solid #ccc;
   padding: 5px;
   width: 300px;

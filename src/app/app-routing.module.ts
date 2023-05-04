@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
   { path: 'Home', component: ClickComponent },
   { path: 'High Low Bet', component: HighLowComponent },
-  { path: 'Forum', component: UserFormComponent },
+  { path: 'Form', component: UserFormComponent },
 ];
 
 @NgModule({

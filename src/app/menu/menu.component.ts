@@ -27,7 +27,14 @@ export class MenuComponent implements OnInit {
     this.allNumbers.muteOb.subscribe(ismuted => {
       this.isImage1 = ismuted;
     })
-    //const mainDiv = document.getElementById('mainDiv');
+    this.allNumbers.name$.subscribe(name =>{
+      this.playerName = name;
+    })
+    this.allNumbers.color$.subscribe(color =>{
+      mainDiv!.style.backgroundColor = color;
+    })
+    const mainDiv = document.getElementById('mainDiv');
+    
     //mainDiv!.style.backgroundColor = this.allNumbers.color;
   }
 

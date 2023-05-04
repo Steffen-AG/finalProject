@@ -8,20 +8,18 @@ import { AllNumbers } from '../allNumbers.service';
   styleUrls: ['./click-component.component.css']
 })
 export class ClickComponent implements OnInit, OnDestroy {
-  public counter: number;
   public multi: number;
   public cost: number;
   public clickers: number;
   public randNum: number;
   public clickersCost: number;
-  private isClicked: boolean;
+  public isClicked: boolean;
   private audio: HTMLAudioElement;
   private shouldPlay: boolean;
-  
 
-  constructor(private router: Router, private allNumbers: AllNumbers){
+
+  constructor(private router: Router, private allNumbers: AllNumbers) {
     this.shouldPlay = true;
-    this.counter = 0;
     this.multi = 1;
     this.cost = 100;
     this.clickers = 0;
@@ -39,32 +37,50 @@ export class ClickComponent implements OnInit, OnDestroy {
         this.shouldPlay = mute;
       }
     });
-    setInterval(()=> { this.updateCount() }, 1 * 1000);
+    const multiValue = localStorage.getItem('multi');
+    const costValue = localStorage.getItem('cost');
+    const clcikersValue = localStorage.getItem('clicker');
+    const clickerCostValue = localStorage.getItem('clickerCost');
+
+    if (multiValue) {
+      this.multi = Number(multiValue);
+    }
+
+    if (costValue) {
+      this.cost = Number(costValue);
+    }
+    if (clcikersValue){
+      this.clickers = Number(clcikersValue);
+    }
+    if(clickerCostValue){
+      this.clickersCost = Number(clickerCostValue);
+    }
+    setInterval(() => { this.updateCount() }, 1 * 1000);
   }
 
 
   ngOnInit(): void {
-    if(this.shouldPlay){
-    this.audio.volume = 0.5;
-    this.audio.play();
+    if (this.shouldPlay) {
+      this.audio.volume = 0.5;
+      this.audio.play();
     }
   }
 
   ngOnDestroy(): void {
-   this.audio.pause();
+    this.audio.pause();
     this.audio.currentTime = 0;
   }
 
-  changeRoute(){
+  changeRoute() {
     this.router.navigate(["High Low Bet"])
   }
 
-  async countClick(){
-    
-    if(!this.isClicked){
+  async countClick() {
+
+    if (!this.isClicked) {
       const mainButton = document.getElementById('mainButton');
       const colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink',
-       'teal', 'gold', 'maroon', 'navy', 'crimson', 'lime', 'magenta', 'skyblue', 'salmon', 'olive', 'turquoise'];
+        'teal', 'gold', 'maroon', 'navy', 'crimson', 'lime', 'magenta', 'skyblue', 'salmon', 'olive', 'turquoise'];
       this.isClicked = true;
 
       const intervalId = setInterval(() => {
@@ -73,34 +89,57 @@ export class ClickComponent implements OnInit, OnDestroy {
       }, 80);
 
 
-      for(let i = 0; i < 10; i++){
+      for (let i = 0; i < 10; i++) {
         this.randNum = Math.floor(Math.random() * 100) * this.multi;
         await this.delay(100);
-    }
+      }
 
-    clearInterval(intervalId);
+      clearInterval(intervalId);
 
-    this.allNumbers.totalPoints += this.randNum;
-    this.isClicked = false;
+      this.allNumbers.totalPoints += this.randNum;
+      this.isClicked = false;
     }
   }
-  buyMultiplier(){
-    if(this.counter >= this.cost){
-      this.counter -= this.cost;
+  buyMultiplier() {
+    if (this.allNumbers.totalPoints >= this.cost) {
+      this.allNumbers.totalPoints -= this.cost;
       this.multi++;
       this.cost *= (this.cost / 20);
+      localStorage.setItem('multi', String(this.multi));
+      localStorage.setItem('cost', String(this.cost));
+      this.allNumbers.playerName = '';
     }
   }
-  updateCount(){
-    this.counter += (Math.floor(Math.random() * 100) * this.clickers) * this.multi;
+  updateCount() {
+    this.allNumbers.totalPoints += (Math.floor(Math.random() * 100) * this.clickers) * this.multi;
     //console.log((1 * this.clickers) * this.multi)
   }
-  buyClicker(){
-    if (this.counter >= this.clickersCost){
+  buyClicker() {
+    if (this.allNumbers.totalPoints >= this.clickersCost) {
       this.clickers++;
-      this.counter -= this.clickersCost;
-      this.clickersCost += this.clickersCost * 2; 
+      this.allNumbers.totalPoints -= this.clickersCost;
+      this.clickersCost += this.clickersCost * 2;
+      localStorage.setItem('clicker', String(this.clickers));
+      localStorage.setItem('clickerCost', String(this.clickersCost));
     }
+  }
+
+  resetProgress(){
+    this.allNumbers.totalPoints = 0;
+
+    this.clickers = 0;
+    localStorage.setItem('clicker', String(0));
+
+    this.clickersCost = 100;
+    localStorage.setItem('clickerCost', String(100));
+
+    this.multi = 1;
+    localStorage.setItem('multi', String(1));
+
+    this.cost = 100;
+    localStorage.setItem('cost', String(100));
+
+
   }
 
 
