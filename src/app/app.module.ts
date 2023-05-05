@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuComponent } from './menu/menu.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule } from '@angular/forms';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     HighLowComponent,
     MenuComponent,
     UserFormComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

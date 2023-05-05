@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AllNumbers } from '../allNumbers.service';
 
@@ -7,7 +7,7 @@ import { AllNumbers } from '../allNumbers.service';
   templateUrl: './high-low.component.html',
   styleUrls: ['./high-low.component.css']
 })
-export class HighLowComponent {
+export class HighLowComponent implements OnInit, OnDestroy {
 
   public inProgress: boolean;
   public betAmount: number;
@@ -15,18 +15,43 @@ export class HighLowComponent {
   public roundCounter: number;
   public lost: boolean;
   public cashOut: boolean;
+  public shouldPlay: boolean;
+  private audio: HTMLAudioElement;
 
   constructor(private route: Router, private allNumbers: AllNumbers) {
+    this.shouldPlay = true;
+    this.audio = new Audio('../../assets/Ape Escape Soundtrack - 16 - Oceana  Crabby Beach.mp3');
+    this.audio.loop = true;
     this.cashOut = false;
     this.inProgress = false;
     this.lost = false;
     this.betAmount = 0;
     this.randomNumber = 5;
     this.roundCounter = 1;
+    this.allNumbers.muteOb.subscribe((mute: boolean) => {
+      if (mute) {
+        this.audio.volume = 0;
+        this.shouldPlay = mute;
+      } else {
+        this.audio.volume = 0.5;
+        this.shouldPlay = mute;
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    if (this.shouldPlay) {
+      this.audio.volume = 0.5;
+      this.audio.play();
+    }
+  }
+  ngOnDestroy(): void {
+    this.audio.pause();
+    this.audio.currentTime = 0;
   }
 
   async startGame() {
-    if (this.betAmount != 0 && this.betAmount <= this.allNumbers.totalPoints) {
+    if (this.betAmount != 0 && this.betAmount <= this.allNumbers.totalPoints && this.betAmount > 0) {
       this.inProgress = true;
       this.allNumbers.totalPoints -= this.betAmount;
 
@@ -50,8 +75,8 @@ export class HighLowComponent {
           } else {
             this.lost = true;
             document.getElementById('game')!.style.backgroundColor = 'red';
-            await this.delay(500);
-            document.getElementById('game')!.style.backgroundColor = 'white';
+            await this.delay(1000);
+            document.getElementById('game')!.style.backgroundColor = 'transparent';
           }
           
         }
@@ -68,7 +93,7 @@ export class HighLowComponent {
       this.cashOut = false;
       this.lost = false;
     } else {
-      if (this.betAmount === 0) {
+      if (this.betAmount <= 0) {
         window.alert('Please bet some money!');
       } else if (this.betAmount > this.allNumbers.totalPoints) {
         window.alert('You are too poor for this bet!');

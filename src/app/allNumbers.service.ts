@@ -56,11 +56,13 @@ export class AllNumbers {
   }
 
   muteBool() {
-    this._mute = !this.mute;
+    this._mute = !this._mute;
+    localStorage.setItem('muted', this._mute.toString());
     this.muteSubject.next(this._mute);
   }
   get mute(): boolean {
-    return this._mute;
+    const storedValue = localStorage.getItem('muted');
+    return storedValue !== null ? (storedValue === 'true') : this._mute;
   }
 
   set playerName(name: string){

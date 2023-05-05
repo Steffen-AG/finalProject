@@ -1,15 +1,24 @@
-<div *ngIf = "!inProgress">
-    <h3>Enter an amount to bet: </h3>
-    <input type="number" [(ngModel)]="betAmount">
+<section>
 
-    <button (click) = "startGame()">Start Game</button>
-</div>
+    <div *ngIf="!inProgress">
+        <h3>Enter an amount to bet: </h3>
+        <input type="number" [(ngModel)]="betAmount">
 
+        <button id="startButton" (click)="startGame()">Start Game</button>
+    </div>
 
-<div id = "game">
-    <h1>{{randomNumber}}</h1>
+    <div id="gameContainer">
+        <img src="../../assets/monkeydance.gif">
+        <div id="game">
 
-    <button id="higherButton">Higher!</button>
-    <button id="lowerButton">Lower!</button>
-    <button id="cashOut">Cash Out</button>
-</div>
+            <h1>{{randomNumber}}</h1>
+            <div id="buttons">
+                <button id="higherButton">Higher!</button>
+                <button id="lowerButton">Lower!</button>
+                <button id="cashOut">Cash Out</button>
+            </div>
+
+        </div>
+        <img src="../../assets/monkeydance.gif">
+    </div>
+</section>
